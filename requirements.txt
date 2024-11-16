@@ -1,0 +1,4 @@
+pydantic
+tinydb
+snoop
+pyyaml
