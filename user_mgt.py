@@ -97,16 +97,25 @@ class Admin(Staff):
       print(f"\nSecond Level Keys\n\t{item.get(first_level_key).keys()}")
       second_level_key = input("Second Level Key: ").strip()
       if second_level_key in item.get(first_level_key).keys():
-        if second_level_key == "supplier_info":
-          print(f"\nThird Level Keys\n\t{item.get(first_level_key).get(second_level_key).keys()}")
-          third_level_key = input("Third Level Key: ").strip()
-          new_entry = input(f"New {third_level_key.title()}: ").strip()
-          item[first_level_key][second_level_key][third_level_key] = new_entry
-        elif second_level_key == "item_id":
-          print(f"⚠️ Immutable Item ID❗")
-        else:
-          entry = input(f"New {second_level_key.title()}: ").strip()
-          item[first_level_key][second_level_key] = entry
+        match second_level_key:
+          case "supplier_info":
+            print(f"\nThird Level Keys\n\t{item.get(first_level_key).get(second_level_key).keys()}")
+            third_level_key = input("Third Level Key: ").strip()
+            new_entry = input(f"New {third_level_key.title()}: ").strip()
+            item[first_level_key][second_level_key][third_level_key] = new_entry
+          case "item_id":
+            print("⚠️ Immutable Item ID❗")
+          case "threshold":
+            print("⚠️ Immutable Item Threshold❗")
+          case "qty":
+            entry = int(input(f"New {second_level_key.title()}: ").strip())
+            item[first_level_key][second_level_key] = entry
+          case "cost_price" | "unit_price" | "discount":
+            entry = float(input(f"New {second_level_key.title()}: ").strip())
+            item[first_level_key][second_level_key] = entry
+          case _:
+            entry = input(f"New {second_level_key.title()}: ").strip()
+            item[first_level_key][second_level_key] = entry
     
     # Updating in database
     DB.update(item, USER.id.item_id == id)

@@ -15,7 +15,7 @@ class Menu:
   def menu(self):
     while True:
       self.display_menu()
-      choice = input("Enter your choice (1-5): ").strip()
+      choice = input("Enter your choice (1-6): ").strip()
       
       match choice:
         case "1": self.admin.addItem()
