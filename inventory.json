@@ -1,0 +1,49 @@
+{
+  "_default": {
+    "1": {
+      "category": {
+        "category": "Drinks",
+        "description": "Premium drinking water"
+      },
+      "date_info": {
+        "date_added": "2024-11-15",
+        "expiry_date": "",
+        "time_added": "23:23:57.651854"
+      },
+      "extras": {
+        "barcode": "6034000005424",
+        "dimensions": "",
+        "nafdac": "A1-3121",
+        "weight": "75cl"
+      },
+      "id": {
+        "item_id": "8a96081a-f349-40bb-88d7-63463bcba115",
+        "item_name": "Aquafina"
+      },
+      "pricing": {
+        "cost_price": 250.0,
+        "currency": "NGN",
+        "discount": 0.0,
+        "unit_price": 300.0
+      },
+      "qty_mgt": {
+        "qty": 5,
+        "threshold": 3
+      },
+      "status": {
+        "item_status": "ACTIVE"
+      },
+      "storage": {
+        "store_location": "247 Moshood Abiola Way, Ijora, Lagos, Nigeria",
+        "zone": ""
+      },
+      "supplier_info": {
+        "supplier_info": {
+          "email": "pepsi@gmail.com",
+          "phone": "08056900900"
+        },
+        "supplier_name": "Pepsi"
+      }
+    }
+  }
+}

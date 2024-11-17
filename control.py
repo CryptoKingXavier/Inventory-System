@@ -5,44 +5,38 @@ Title: Inventory Control
 
 
 # Importing required libraries
-from core import get_inventory
-from pydantic import BaseModel
+from user_mgt import Admin
 
 
-# Empty Inventory Error
-class InventoryError(Exception):
-  def __init__(self, error: str):
-    super().__init__(error)
-
-
-# Custom reorder alerts
-def generate_reorder_alert(item_name: str, id: str, current_quantity: int, reorder_threshold: int):
-  return f"""
-  🔔 REORDER ALERT 🔔
-  Item: {item_name}
-  Item ID: {id}
-  Current Quantity: {current_quantity}
-  Reorder Threshold: {reorder_threshold}
+class Menu:
+  def __init__(self):
+    self.admin: Admin = Admin()
   
-  Action Required: Please reorder this item
-  immediately to maintain optimal stock levels.
-  """
-
-
-class Alerts(BaseModel):
-  def reorder(self):
-    """Setting threshold for low-stock items when inventory levels fall below a certain quantity"""
-    inventory = get_inventory()
+  def menu(self):
+    while True:
+      self.display_menu()
+      choice = input("Enter your choice (1-5): ").strip()
+      
+      match choice:
+        case "1": self.admin.addItem()
+        case "2": self.admin.viewInventory()
+        case "3": self.admin.updateItem()
+        case "4": self.admin.deleteItem()
+        case "5": self.admin.alerts()
+        case "6":
+          print("Exiting the application. Goodbye❗")
+          break
+        case _:
+          print("Invalid choice. Please enter a number between 1 and 6.\n")
     
-    if inventory:
-      for item in inventory:
-        threshold = item.get("qty_mgt").get("threshold")
-        if item.get("qty_mgt").get("qty") < threshold:
-          print(generate_reorder_alert(
-            reorder_threshold=threshold,
-            id=item.get("id").get("item_id"),
-            item_name=item.get("id").get("item_name"),
-            current_quantity=item.get("qty_mgt").get("qty")
-          ))
-    else:
-      raise InventoryError("⚠️ Inventory is empty❗")
+  @staticmethod
+  def display_menu():
+    print("""
+    ==== Inventory System Menu ====
+    1. Add Item
+    2. View Inventory
+    3. Update Item
+    4. Delete Item
+    5. Alerts
+    6. Exit
+    """)

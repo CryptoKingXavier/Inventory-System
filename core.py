@@ -45,9 +45,9 @@ class AddItem:
 
 # View Inventory: display all items and filter based on categories
 class ViewInventory(BaseModel):
-  def view(self, id: str):
+  def view(self, id = None):
     if not id:
-      id: str = input("Item ID: ")
+      id: str = input("Item ID: ").strip()
     
     if id in get_inventory_ids():
       return DB.search(USER.id.item_id == id)
@@ -58,7 +58,7 @@ class ViewInventory(BaseModel):
 # Update Item: modify an item’s information
 class UpdateItem(BaseModel):
   def update(self):
-    id: str = input("Item ID: ")
+    id: str = input("Item ID: ").strip()
     if id in get_inventory_ids():
       return id, ViewInventory().view(id)
     else:
@@ -68,7 +68,7 @@ class UpdateItem(BaseModel):
 # Delete Item: remove items that are no longer needed or relevant
 class DeleteItem(BaseModel):
   def delete(self):
-    id: str = input("Item ID: ")
+    id: str = input("Item ID: ").strip()
     if id in get_inventory_ids():
       DB.remove(USER.id.item_id == id)
       print(f"ℹ️ Item with ID: {id} trashed... 🗑️")
